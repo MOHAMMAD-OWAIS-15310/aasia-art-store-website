@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>artStore</title>
+</head>
+<body>
+    <h2>Painting in Detail</h2>
+     <ul>
+        <img src="<%=listing.image%>" alt="" height="200px">
+        <li>title : <%=listing.title%></li>
+        <li>price : &#8377;<%=listing.price.toLocaleString("en-IN")%></li>
+        <li>size : <%=listing.size%></li>
+        <li>medium : <%=listing.medium%></li>
+        <li>Available? <%=listing.available%></li>
+     </ul>
+     <form method="get" action="/listings/<%=listing.id%>/edit">
+        <button>edit</button>
+     </form>
+</body>
+</html>
