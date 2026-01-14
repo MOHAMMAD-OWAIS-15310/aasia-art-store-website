@@ -1,10 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>artStore</title>
-</head>
+<% layout("/layouts/boilerplate") %>
 <body>
     <h2>create a new painting</h2>
     <form method="post" action="/listings/">
@@ -13,8 +7,12 @@
         <input name="listing[price]" placeholder="enter price" type="number"><br><br>
         <input name="listing[size]" placeholder="enter size" type="text"><br><br>
         <input name="listing[medium]" placeholder="enter medium" type="text"><br><br>
-        <input name="listing[available]" placeholder="yes or No" type="text"><br><br>
+        <!-- <input name="listing[available]" placeholder="yes or No" type="text"><br><br> -->
+        <label>Available:</label>
+        <select name="listing[available]">
+            <option value="yes" >Yes</option>
+            <option value="no" >No</option>
+        </select><br><br>
         <button>Add</button>
     </form>
 </body>
-</html>

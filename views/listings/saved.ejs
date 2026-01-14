@@ -1,0 +1,18 @@
+<% layout("/layouts/boilerplate") %>
+
+<body>
+    <h2>My Saved Paintings</h2>
+    <% if(saved.length === 0){ %>
+        <p>No saved paintings</p>
+    <% } %>
+    <ul>
+    <%for(let listing of saved){ %>
+        <div class="save-one">
+            <li><a href="/listings/<%=listing.listing._id%>"><%= listing.listing.title %></a></li> &nbsp;&nbsp;
+             <form method="post" action="/listings/<%=listing.listing._id%>/unsave">
+                  <button type="submit" class="btn btn-danger unsave-btn">remove</button>
+            </form>
+        </div>
+    <%}  %>
+    </ul>
+</body>

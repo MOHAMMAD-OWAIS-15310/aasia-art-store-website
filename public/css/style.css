@@ -1,0 +1,34 @@
+.navbar{
+    background-color: rgb(228, 232, 238) !important;
+    height: 5rem;
+}
+.logo{
+    border-radius: 25px;
+}
+.nav-link{
+    color: black !important;
+}
+.save-one{
+    display: flex;
+}
+.unsave-btn{
+    padding: 2px;
+    margin: 3px;
+}
+.footer{
+    background-color: rgb(226, 241, 245);
+    text-align: center;
+    height: 5rem;
+}
+.social-logo{
+    color: black;
+}
+.social-logo:hover{
+    color: rgb(146, 92, 117);
+}
+.f-link a{
+    text-decoration: none;
+}
+.f-link a:hover{
+    text-decoration: underline;
+}

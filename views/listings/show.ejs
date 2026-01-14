@@ -1,10 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>artStore</title>
-</head>
+<% layout("/layouts/boilerplate") %>
 <body>
     <h2>Painting in Detail</h2>
      <ul>
@@ -15,8 +9,18 @@
         <li>medium : <%=listing.medium%></li>
         <li>Available? <%=listing.available%></li>
      </ul>
+
+     <form method="get" action="/listings/<%=listing.id%>/payment">
+        <button>Buy Now</button>
+     </form><br>
+     <form method="post" action="/listings/<%=listing.id%>/save">
+        <button>Save Painting</button>
+     </form><br>
+
      <form method="get" action="/listings/<%=listing.id%>/edit">
         <button>edit</button>
+     </form><br>
+     <form method="post" action="/listings/<%=listing._id%>?_method=delete">
+        <button>delete</button>
      </form>
 </body>
-</html>

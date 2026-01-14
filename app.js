@@ -4,6 +4,8 @@ const app=express();
 const Listing = require("./models/listing.js");
 const path=require("path");
 const methodOverride=require("method-override");
+const ejsMate = require("ejs-mate");
+const SavedPainting = require("./models/savedPaintings.js");
 
 const MONGO_URL="mongodb://127.0.0.1:27017/artStore";
 
@@ -22,11 +24,39 @@ app.set("view engine","ejs");
 app.set("views",path.join(__dirname,"views"));
 app.use(express.urlencoded({extended : true}));
 app.use(methodOverride("_method"));
+app.engine('ejs',ejsMate);
+app.use(express.static(path.join(__dirname,"/public")));
 
 app.get("/",(req,res)=>{
     res.send("working");
 });
 
+//saved painting routes
+//save route
+app.post("/listings/:id/save",async(req,res)=>{
+    const {id} =req.params;
+    const alreadySaved = await SavedPainting.findOne({listing : id});
+    if( !alreadySaved){
+      const savedPainting = new SavedPainting({listing : id});
+         await savedPainting.save();
+    }
+    res.redirect("/listings");
+});
+
+//save index
+app.get("/listings/saved", async (req, res) => {
+    const saved = await SavedPainting.find({}).populate("listing");
+    res.render("listings/saved.ejs", { saved });
+});
+
+// unsave
+app.post("/listings/:id/unsave", async (req, res) => {
+    const { id } = req.params;
+    await SavedPainting.findOneAndDelete({ listing: id });
+    res.redirect("/listings/saved");
+});
+
+//paintings
 //index
 app.get("/listings",async(req,res)=>{
     const allListings = await Listing.find({});
@@ -37,6 +67,24 @@ app.get("/listings",async(req,res)=>{
 app.get("/listings/new",(req,res)=>{
     res.render("listings/new.ejs");
 })
+
+//about
+app.get("/listings/about",(req,res)=>{
+    res.render("listings/about.ejs");
+});
+
+//myCart
+app.get("/listings/cart",(req,res)=>{
+    res.render("listings/cart.ejs");
+});
+
+//buyNow
+app.get("/listings/:id/payment",async(req,res)=>{
+    let {id} = req.params;
+    const listing= await Listing.findById(id);
+    res.render("listings/payment.ejs",{listing});
+});
+
 
 //show rroute
 app.get("/listings/:id",async(req,res)=>{
@@ -65,8 +113,19 @@ app.get("/listings/:id/edit",async(req,res)=>{
 app.put("/listings/:id" , async(req,res) =>{
     let {id}=req.params;
     await Listing.findByIdAndUpdate(id,{...req.body.listing});
-    res.redirect("/listings");
+    res.redirect(`/listings/${id}`);
+});
+
+//delete
+app.delete("/listings/:id",async(req,res)=>{
+   let {id}=req.params;
+   let deletedListing = await Listing.findByIdAndDelete(id);
+   //console.log(deletedListing);
+   res.redirect("/listings");
 })
+
+
+
 
 
 // app.get("/testlisting", async (req,res)=>{
