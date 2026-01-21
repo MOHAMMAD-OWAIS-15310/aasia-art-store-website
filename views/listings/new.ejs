@@ -1,18 +1,48 @@
 <% layout("/layouts/boilerplate") %>
 <body>
-    <h2>create a new painting</h2>
-    <form method="post" action="/listings/">
-        <input name="listing[title]" placeholder="enter title" type="text"><br><br>
-        <input name="listing[image]" placeholder="enter image url/link" type="text"><br><br>
-        <input name="listing[price]" placeholder="enter price" type="number"><br><br>
-        <input name="listing[size]" placeholder="enter size" type="text"><br><br>
-        <input name="listing[medium]" placeholder="enter medium" type="text"><br><br>
-        <!-- <input name="listing[available]" placeholder="yes or No" type="text"><br><br> -->
-        <label>Available:</label>
-        <select name="listing[available]">
-            <option value="yes" >Yes</option>
-            <option value="no" >No</option>
-        </select><br><br>
-        <button>Add</button>
-    </form>
+    <div class="row">
+        <div class="col-6  offset-3 ">
+        <h2>create a new painting</h2>
+        <form method="post" action="/listings/" novalidate class="needs-validation">
+            <div class="mt-2">
+                <label for="title" class="form-label">Title</label>
+                <input name="listing[title]" placeholder="enter title" type="text" class="form-control" required>
+                <div class="invalid-feedback">
+                    Please enter Title.
+                </div>
+            </div>
+            <div class="mt-2">
+                <label for="image" class="form-label">Image</label>
+                <input name="listing[image]" placeholder="enter image url/link" type="text" class="form-control">
+            </div>
+            <div class="mt-2">
+                <label for="price" class="form-label">Price</label>
+                <input name="listing[price]" placeholder="enter price" type="number" class="form-control" required>
+                <div class="invalid-feedback">
+                    Please enter Price.
+                </div>
+            </div>
+            <div class="mt-2">
+                <label for="size" class="form-label">Size</label>
+                <input name="listing[size]" placeholder="enter size" type="text" class="form-control" required>
+                <div class="invalid-feedback">
+                    Please enter Size.
+                </div>
+            </div>
+            <div class="mt-2">
+                <label for="medium" class="form-label">Medium</label>
+                <input name="listing[medium]" placeholder="enter medium" type="text" class="form-control" >
+            </div>
+            <!-- <input name="listing[available]" placeholder="yes or No" type="text"><br><br> -->
+            <div class="mt-2">
+                <label for="available" class="form-label">Available</label>
+                <select name="listing[available]" class="form-control">
+                    <option value="yes" >Yes</option>
+                    <option value="no" >No</option>
+                </select><br>
+            </div>
+            <button class="btn btn-dark">Add</button>
+        </form>
+        </div>
+    </div>
 </body>

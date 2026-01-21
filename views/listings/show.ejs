@@ -1,26 +1,39 @@
 <% layout("/layouts/boilerplate") %>
 <body>
-    <h2>Painting in Detail</h2>
-     <ul>
-        <img src="<%=listing.image%>" alt="" height="200px">
-        <li>title : <%=listing.title%></li>
-        <li>price : &#8377;<%=listing.price.toLocaleString("en-IN")%></li>
-        <li>size : <%=listing.size%></li>
-        <li>medium : <%=listing.medium%></li>
-        <li>Available? <%=listing.available%></li>
-     </ul>
+   
+   <div class="row mt-3">
+      <div class="col-8 offset-2">
+         
+         <h2>Painting in Detail</h2>
+         <div class="card" style="width: 18rem;">
+            <img src="<%=listing.image%>" class="card-img-top show-img" alt="listing_image">
+            <div class="card-body">
+               <div>
+                  <ul>
+                     <li>title : <%=listing.title%></li>
+                     <li>price : &#8377;<%=listing.price.toLocaleString("en-IN")%></li>
+                     <li>size : <%=listing.size%></li>
+                     <li>medium : <%=listing.medium%></li>
+                     <li>Available? <%=listing.available%></li>
+                  </ul>
+               </div>
+               <div class="show-button">
+                  <form method="get" action="/listings/<%=listing.id%>/payment">
+                     <button class="btn btn-dark buy-btn-show">Buy Now</button>
+                  </form><br>
+                  <form method="post" action="/listings/<%=listing.id%>/save">
+                     <button class="btn btn-success">Save Painting</button>
+                  </form><br>
+                  <form method="get" action="/listings/<%=listing.id%>/edit">
+                     <button class="btn btn-danger">edit</button>
+                  </form><br>
+                  <form method="post" action="/listings/<%=listing._id%>?_method=delete">
+                     <button class="btn btn-danger">delete</button>
+                  </form>
+               </div>
+            </div>
+         </div>
 
-     <form method="get" action="/listings/<%=listing.id%>/payment">
-        <button>Buy Now</button>
-     </form><br>
-     <form method="post" action="/listings/<%=listing.id%>/save">
-        <button>Save Painting</button>
-     </form><br>
-
-     <form method="get" action="/listings/<%=listing.id%>/edit">
-        <button>edit</button>
-     </form><br>
-     <form method="post" action="/listings/<%=listing._id%>?_method=delete">
-        <button>delete</button>
-     </form>
+      </div>
+   </div>
 </body>

@@ -1,12 +1,27 @@
+body{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.container{
+    flex: 1;
+}
+
 .navbar{
     background-color: rgb(228, 232, 238) !important;
     height: 5rem;
+}
+.navbar-collapse{
+    background-color: rgb(228, 232, 238) !important;
 }
 .logo{
     border-radius: 25px;
 }
 .nav-link{
     color: black !important;
+}
+.nav-link:hover{
+    color: rgb(116, 32, 32) !important;
 }
 .save-one{
     display: flex;
@@ -15,6 +30,8 @@
     padding: 2px;
     margin: 3px;
 }
+
+/* footer */
 .footer{
     background-color: rgb(226, 241, 245);
     text-align: center;
@@ -25,10 +42,75 @@
 }
 .social-logo:hover{
     color: rgb(146, 92, 117);
+    cursor: pointer;
 }
 .f-link a{
     text-decoration: none;
 }
 .f-link a:hover{
     text-decoration: underline;
+    cursor: pointer;
 }
+
+/* card */
+.card{
+    border: none !important;
+    margin-bottom: 3rem;
+}
+.card-img-top{
+    border-radius: 12px !important;
+    width: 100% !important;
+    object-fit: cover !important;
+}
+.card-body{
+    padding: 2px;
+    display: grid;
+    justify-content: center;
+}
+.card-text{
+    margin: 2px !important;
+}
+
+.index-two-btn{
+    display: flex;
+    justify-content: center;
+    /* gap: 2rem; */
+}
+.buy-btn{
+    margin-right: 2rem;
+    background-color: rgb(105, 18, 187) !important;
+    border: none !important;
+}
+.buy-btn:hover{
+    background-color: rgb(52, 6, 94) !important;
+}
+.img-anchor:hover{
+    opacity: 0.8;
+    background-color: white;
+}
+
+.about-para{
+    color: rgb(136, 62, 75) !important;
+}
+
+/* show page */
+.show-img{
+    height: 40vh !important;
+    width: 60vw !important;
+}
+
+.show-button{
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    align-items: center;
+}
+
+.buy-btn-show{
+    padding-right: 30px;;
+    padding-left: 30px;;
+    margin-right: 2rem;
+    background-color: rgb(105, 18, 187) !important;
+    border: none !important;
+}
+

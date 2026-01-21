@@ -1,18 +1,40 @@
 <% layout("/layouts/boilerplate") %>
 <body>
-    <h3>edit listing</h3>
-    <form method="post" action="/listings/<%=listing._id%>?_method=put">
-        <input name="listing[title]" value="<%= listing.title %>" type="text"><br><br>
-        <input name="listing[image]" value="<%= listing.image %>" type="text"><br><br>
-        <input name="listing[price]" value="<%= listing.price %>" type="number"><br><br>
-        <input name="listing[size]" value="<%= listing.size %>" type="text"><br><br>
-        <input name="listing[medium]" value="<%= listing.medium %>" type="text"><br><br>
-        <!-- <input name="listing[available]" value="<%= listing.available %>" type="text"><br><br> -->
-        <label>Available:</label>
-        <select name="listing[available]">
-            <option value="yes" <%= listing.available === 'yes' ? 'selected' : '' %>>Yes</option>
-            <option value="no"  <%= listing.available === 'no' ? 'selected' : '' %>>No</option>
-        </select>
-        <button>Add</button>
-    </form>
+    <div class="row">
+        <div class="col-6  offset-3 ">
+            <h3>Edit listing</h3>
+            <form method="post" action="/listings/<%=listing._id%>?_method=put" novalidate class="needs-validation">
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title</label>
+                    <input name="listing[title]" value="<%= listing.title %>" type="text" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="image" class="form-label">Image</label>
+                    <input name="listing[image]" value="<%= listing.image %>" type="text" class="form-control" required>
+                </div>
+                <div>
+                    <label for="price" class="form-label">Price</label>
+                    <input name="listing[price]" value="<%= listing.price %>" type="number" class="form-control" required>
+                </div>
+                <div>
+                    <label for="size" class="form-label">size</label>
+                    <input name="listing[size]" value="<%= listing.size %>" type="text" class="form-control" required>
+                </div>
+                <div>
+                    <label for="medium" class="form-label">medium</label>
+                    <input name="listing[medium]" value="<%= listing.medium %>" type="text" class="form-control">
+                </div>
+                <!-- <input name="listing[available]" value="<%= listing.available %>" type="text"><br><br> -->
+                <div>
+                    <label class="form-label">Available:</label>
+                    <select name="listing[available]" class="form-control">
+                        <option value="yes" <%= listing.available === 'yes' ? 'selected' : '' %>>Yes</option>
+                        <option value="no"  <%= listing.available === 'no' ? 'selected' : '' %>>No</option>
+                    </select>
+                </div>
+                <br>
+                <button class="btn btn-dark">Add</button>
+            </form>
+        </div>
+    </div>
 </body>
