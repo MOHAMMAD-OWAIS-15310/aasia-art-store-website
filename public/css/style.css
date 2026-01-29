@@ -52,8 +52,12 @@ body{
     cursor: pointer;
 }
 
+.review-card{
+    border-radius: 2px solid black !important;
+}
+
 /* card */
-.card{
+.listing-card{
     border: none !important;
     margin-bottom: 3rem;
 }
@@ -62,7 +66,7 @@ body{
     width: 100% !important;
     object-fit: cover !important;
 }
-.card-body{
+.listing-card-body{
     padding: 2px;
     display: grid;
     justify-content: center;
@@ -110,7 +114,14 @@ body{
     padding-right: 30px;;
     padding-left: 30px;;
     margin-right: 2rem;
+    margin-left: 2rem;
     background-color: rgb(105, 18, 187) !important;
     border: none !important;
 }
+.all-li{
+    margin-left: 2rem;
+}
+
+
+
 

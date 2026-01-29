@@ -8,11 +8,12 @@
     <ul>
     <%for(let listing of saved){ %>
         <div class="save-one">
-            <li><a href="/listings/<%=listing.listing._id%>"><%= listing.listing.title %></a></li> &nbsp;&nbsp;
+            <a href="/listings/<%=listing.listing._id%>"><img src="<%= listing.listing.image %>" alt="painting" height="100px" width="150px"></a>
              <form method="post" action="/listings/<%=listing.listing._id%>/unsave">
-                  <button type="submit" class="btn btn-danger unsave-btn">remove</button>
+                  &nbsp;&nbsp;&nbsp;<button type="submit" class="btn btn-danger unsave-btn">remove</button>
             </form>
         </div>
+        <br>
     <%}  %>
     </ul>
 </body>
