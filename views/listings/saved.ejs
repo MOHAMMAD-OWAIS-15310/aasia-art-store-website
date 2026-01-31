@@ -1,12 +1,13 @@
 <% layout("/layouts/boilerplate") %>
 
 <body>
-    <h2>My Saved Paintings</h2>
+    <h2 class="mb-3 mt-3">My Saved Paintings</h2>
     <% if(saved.length === 0){ %>
         <p>No saved paintings</p>
     <% } %>
     <ul>
     <%for(let listing of saved){ %>
+        <% if (listing.listing) { %>
         <div class="save-one">
             <a href="/listings/<%=listing.listing._id%>"><img src="<%= listing.listing.image %>" alt="painting" height="100px" width="150px"></a>
              <form method="post" action="/listings/<%=listing.listing._id%>/unsave">
@@ -14,6 +15,7 @@
             </form>
         </div>
         <br>
+        <% } %>
     <%}  %>
     </ul>
 </body>
