@@ -122,6 +122,16 @@ body{
     margin-left: 2rem;
 }
 
+/* available color */
+.available-yes-color{
+    color: rgb(68, 186, 68) !important;
+    font-weight: bold;
+}
+.available-no-color{
+    color: red !important;
+    font-weight: bold;
+}
+
 
 
 

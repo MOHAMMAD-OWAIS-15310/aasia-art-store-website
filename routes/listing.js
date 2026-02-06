@@ -65,6 +65,7 @@ router.post("/",validateListing, wrapAsync(async(req,res)=>{
     const newListing=new Listing(req.body.listing);
     await newListing.save();
     // console.log(newListing);
+    req.flash("success","new painting created !");
     res.redirect("/listings");
 }));
 
@@ -82,6 +83,7 @@ router.put("/:id" ,validateListing, wrapAsync( async(req,res) =>{
     // }
     let {id}=req.params;
     await Listing.findByIdAndUpdate(id,{...req.body.listing});
+    req.flash("success"," painting updated !");
     res.redirect(`/listings/${id}`);
 }));
 
@@ -93,6 +95,7 @@ router.delete("/:id", wrapAsync(async(req,res)=>{
    //delete from savedpainting db also
    let issaved=await SavedPainting.findOneAndDelete({ listing: id });
     //console.log(issaved);
+    req.flash("success"," painting deleted !");
    res.redirect("/listings");
 }));
 
