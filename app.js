@@ -13,10 +13,14 @@ const {reviewSchema} = require("./schema.js");
 const Review = require("./models/review.js");
 const session = require("express-session");
 const flash = require("connect-flash");
+const passport = require("passport");
+const LocalStrategy = require("passport-local");
+const User = require("./models/user.js");
 
-const listings = require("./routes/listing.js");
-const reviews = require("./routes/review.js");
-const savedPaintings = require("./routes/savedPainting.js");
+const listingsRouter = require("./routes/listing.js");
+const reviewsRouter = require("./routes/review.js");
+const savedPaintingsRouter = require("./routes/savedPainting.js");
+const userRouter = require("./routes/user.js");
 
 
 const MONGO_URL="mongodb://127.0.0.1:27017/artStore";
@@ -56,8 +60,17 @@ app.get("/",(req,res)=>{
 app.use(session(sessionOptions));
 app.use(flash());
 
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+// passport.use(new LocalStrategy({ usernameField: "email" },User.authenticate()));
+
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
 app.use((req,res,next)=>{
     res.locals.success = req.flash("success");
+    res.locals.error = req.flash("error");
     next();
 })
 
@@ -66,28 +79,18 @@ app.use((req,res,next)=>{
 
 
 //saved painting routes
-app.use("/listings",savedPaintings);
+app.use("/listings",savedPaintingsRouter);
 
 
 //paintings
-app.use("/listings",listings);
+app.use("/listings",listingsRouter);
 
 //reviews
-app.use("/listings/:id/reviews",reviews);
+app.use("/listings/:id/reviews",reviewsRouter);
 
-// app.get("/testlisting", async (req,res)=>{
-//     let sampleListing= new Listing({
-//         title: "trees",
-//         price: 100,
-//         size : "medium" , 
-//         medium :"guache" ,
-//         available :"yes" ,
-//         image :"C:\Users\Ahmed Taqiuddin\Pictures\Aasia's collection (p)\IMG_20220615_150541_197.jpg" ,
-//     });
-//     await sampleListing.save();
-//     console.log("sample was saved");
-//     res.send("successful");
-// })
+
+app.use("/",userRouter);
+
 
 
 app.use((err,req,res,next)=>{
