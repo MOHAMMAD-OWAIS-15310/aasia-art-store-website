@@ -3,6 +3,7 @@ const router = express.Router();
 const User = require("../models/user.js");
 const wrapAsync = require("../utils/wrapAsync");
 const passport = require("passport");
+const { saveRedirectUrl } = require("../middleware.js");
 
 router.get("/signup",(req,res)=>{
     res.render("users/signup.ejs");
@@ -14,8 +15,14 @@ router.post("/signup",wrapAsync(async(req,res)=>{
     const newUser = new User({email, username});
     let registeredUser = await User.register(newUser ,password);
     console.log(registeredUser);
-    req.flash("success","user registered successfully");
+    req.login(registeredUser,(err)=>{
+      if(err){
+        return next(err);
+      }
+       req.flash("success","user registered successfully");
     res.redirect("/listings");
+    });
+   
     }
     catch(err){
         req.flash("error",err.message);
@@ -32,7 +39,7 @@ router.get("/login",(req,res)=>{
 //     res.redirect("/listings");
 // });
 
-router.post("/login", async (req, res, next) => {
+router.post("/login",saveRedirectUrl, async (req, res, next) => {
   const { email, password } = req.body;
 
   try {
@@ -54,7 +61,9 @@ router.post("/login", async (req, res, next) => {
       if (err) return next(err);
 
       req.flash("success", "successfully logged in");
-      res.redirect("/listings");
+      // res.redirect("/listings");
+      let redirectUrl=res.locals.redirectUrl || "/listings";
+      res.redirect(redirectUrl);
     });
 
   } catch (err) {
