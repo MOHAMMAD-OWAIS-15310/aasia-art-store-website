@@ -8,6 +8,7 @@ const Listing = require("../models/listing.js");
 const SavedPainting = require("../models/savedPaintings.js");
 const mongoose = require("mongoose");
 const {isLoggedIn}= require("../middleware.js");
+const {isAdminLoggedIn}= require("../middleware.js");
 
 const validateListing = (req,res,next)=>{
     let {error} = listingSchema.validate(req.body);
@@ -29,7 +30,7 @@ router.get("/", wrapAsync(async(req,res)=>{
 }));
 
 //new
-router.get("/new",isLoggedIn,((req,res)=>{
+router.get("/new",isAdminLoggedIn,((req,res)=>{
     // if(!req.isAuthenticated()){
     //     req.flash("error","you must be logged in as admin");
     //     return res.redirect("/login");
@@ -62,12 +63,13 @@ router.get("/:id/payment", wrapAsync(async(req,res)=>{
 //show route
 router.get("/:id", wrapAsync(async(req,res)=>{
     let {id}=req.params;
-    const listing= await Listing.findById(id).populate("reviews");
+    // const listing= await Listing.findById(id).populate("reviews").populate("author");
+    const listing= await Listing.findById(id).populate({path:"reviews",populate:{path :"author",},});
     res.render("listings/show.ejs",{listing});
 }));
 
 //create
-router.post("/",isLoggedIn,validateListing, wrapAsync(async(req,res)=>{
+router.post("/",isAdminLoggedIn,validateListing, wrapAsync(async(req,res)=>{
     // let listing =req.body.listing;
     // console.log(req.body);
     const newListing=new Listing(req.body.listing);
@@ -78,32 +80,37 @@ router.post("/",isLoggedIn,validateListing, wrapAsync(async(req,res)=>{
 }));
 
 //edit
-router.get("/:id/edit",isLoggedIn, wrapAsync(async(req,res)=>{
+router.get("/:id/edit",isAdminLoggedIn, wrapAsync(async(req,res)=>{
     let {id}=req.params;
     const listing = await Listing.findById(id);
     res.render("listings/edit.ejs",{listing});
 }));
 
 //update
-router.put("/:id" ,isLoggedIn, validateListing, wrapAsync( async(req,res) =>{
+router.put("/:id" ,isAdminLoggedIn, validateListing, wrapAsync( async(req,res) =>{
     // if( !req.body.listing){
     //     throw new ExpressError(400 , "send valid data");
     // }
     let {id}=req.params;
-    await Listing.findByIdAndUpdate(id,{...req.body.listing});
-    req.flash("success"," painting updated !");
+    // await Listing.findByIdAndUpdate(id,{...req.body.listing});
+    if (req.user.email == "aasiataqi1811@gmail.com") {
+        await Listing.findByIdAndUpdate(id,{...req.body.listing});
+        req.flash("success"," painting updated !");
+    }
     res.redirect(`/listings/${id}`);
 }));
 
 //delete
-router.delete("/:id",isLoggedIn, wrapAsync(async(req,res)=>{
+router.delete("/:id",isAdminLoggedIn, wrapAsync(async(req,res)=>{
    let {id}=req.params;
-   let deletedListing = await Listing.findByIdAndDelete(id);
-    //console.log(deletedListing);
-   //delete from savedpainting db also
-   let issaved=await SavedPainting.findOneAndDelete({ listing: id });
-    //console.log(issaved);
-    req.flash("success"," painting deleted !");
+   if (req.user.email == "aasiataqi1811@gmail.com") {
+    let deletedListing = await Listing.findByIdAndDelete(id);
+        //console.log(deletedListing);
+        //delete frm savedpainting db also
+        let issaved=await SavedPainting.findOneAndDelete({ listing: id });
+        //console.log(issaved);
+        req.flash("success"," painting deleted !");
+   }
    res.redirect("/listings");
 }));
 

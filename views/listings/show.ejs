@@ -23,18 +23,21 @@
                   <form method="post" action="/listings/<%=listing.id%>/save">
                      <button class="btn btn-success">Save Painting</button>
                   </form><br>
+                 <% if (currUser && currUser.email == "aasiataqi1811@gmail.com") { %>
                   <form method="get" action="/listings/<%=listing.id%>/edit">
                      <button class="btn btn-danger">edit</button>
                   </form><br>
                   <form method="post" action="/listings/<%=listing._id%>?_method=DELETE">
                      <button class="btn btn-danger">delete</button>
                   </form>
+                  <% } %>
                </div>
             </div>
          </div>
 
          <div>
             <hr>
+            
             <h4>Give a Review</h4>
             <form action="/listings/<%=listing.id%>/reviews" method="post" novalidate class="needs-validation">
                <div>
@@ -57,12 +60,14 @@
                <% for( review of listing.reviews){ %>
                   <div class="card  col-5 mb-2 mt-2 m-2">
                      <div class="card-body">
-                        <h5 class="card-title">owais</h5>
+                        <h5 class="card-title">@<%=review.author.username %></h5>
                         <p class="card-text"><%= review.comment %> </p>
                         <p class="card-text"><%= review.rating %> stars </p>
                      </div>
                      <form method="post" action="/listings/<%=listing.id%>/reviews/<%=review.id%>?_method=delete">
+                        <% if(currUser){ %>
                         <button class="btn btn-danger mb-2">delete</button>
+                        <% } %>
                      </form>
                      
                   </div>
