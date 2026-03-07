@@ -6,6 +6,11 @@ const savedPaintingSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "Listing",
         required: true
+    },
+    user : {
+        type : Schema.Types.ObjectId,
+        ref : "User",
+        required: true
     }
 });
 

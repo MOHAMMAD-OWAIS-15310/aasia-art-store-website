@@ -10,7 +10,9 @@
         <a class="nav-link" href="/listings">All Paintings</a>
         <a class="nav-link "  href="/listings/about">About Me</a>
         <a class="nav-link" href="/listings/new">Add New Painting</a>
+        <% if(currUser){ %>
         <a class="nav-link" href="/listings/saved">Saved Paintings</a>
+        <% } %>
         
       </div>
       <div class="navbar-nav ms-auto">

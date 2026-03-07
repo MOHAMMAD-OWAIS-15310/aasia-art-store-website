@@ -63,7 +63,7 @@ router.post("/login",saveRedirectUrl, async (req, res, next) => {
       req.flash("success", "successfully logged in");
       // res.redirect("/listings");
       let redirectUrl=res.locals.redirectUrl || "/listings";
-      // console.log(redirectUrl);
+      console.log(redirectUrl);
       res.redirect(redirectUrl);
     });
 
