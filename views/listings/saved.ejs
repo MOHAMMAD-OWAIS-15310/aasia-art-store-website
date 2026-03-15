@@ -9,7 +9,7 @@
     <%for(let listing of saved){ %>
         <% if (listing.listing) { %>
         <div class="save-one">
-            <a href="/listings/<%=listing.listing._id%>"><img src="<%= listing.listing.image %>" alt="painting" height="100px" width="150px"></a>
+            <a href="/listings/<%=listing.listing._id%>"><img src="<%= listing.listing.image.url %>" alt="painting" height="100px" width="150px"></a>
              <form method="post" action="/listings/<%=listing.listing._id%>/unsave">
                   &nbsp;&nbsp;&nbsp;<button type="submit" class="btn btn-danger unsave-btn">remove</button>
             </form>

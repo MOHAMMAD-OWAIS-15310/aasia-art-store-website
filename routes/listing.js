@@ -9,6 +9,10 @@ const SavedPainting = require("../models/savedPaintings.js");
 const mongoose = require("mongoose");
 const {isLoggedIn}= require("../middleware.js");
 const {isAdminLoggedIn}= require("../middleware.js");
+const multer  = require('multer');
+
+const {storage} = require("../cloudConfig.js");
+const upload = multer({ storage});
 
 const validateListing = (req,res,next)=>{
     let {error} = listingSchema.validate(req.body);
@@ -69,15 +73,20 @@ router.get("/:id", wrapAsync(async(req,res)=>{
 }));
 
 //create
-router.post("/",isAdminLoggedIn,validateListing, wrapAsync(async(req,res)=>{
+router.post("/",isAdminLoggedIn,upload.single('listing[image]'),validateListing, wrapAsync(async(req,res)=>{
     // let listing =req.body.listing;
     // console.log(req.body);
+    let url=req.file.path;
+    let filename = req.file.filename;
+    console.log(url,"..",filename);
     const newListing=new Listing(req.body.listing);
+    newListing.image ={url,filename};
     await newListing.save();
     // console.log(newListing);
     req.flash("success","new painting created !");
     res.redirect("/listings");
 }));
+
 
 //edit
 router.get("/:id/edit",isAdminLoggedIn, wrapAsync(async(req,res)=>{
@@ -87,14 +96,18 @@ router.get("/:id/edit",isAdminLoggedIn, wrapAsync(async(req,res)=>{
 }));
 
 //update
-router.put("/:id" ,isAdminLoggedIn, validateListing, wrapAsync( async(req,res) =>{
+router.put("/:id" ,isAdminLoggedIn,upload.single('listing[image]'), validateListing, wrapAsync( async(req,res) =>{
     // if( !req.body.listing){
     //     throw new ExpressError(400 , "send valid data");
     // }
     let {id}=req.params;
     // await Listing.findByIdAndUpdate(id,{...req.body.listing});
     if (req.user.email == "aasiataqi1811@gmail.com") {
-        await Listing.findByIdAndUpdate(id,{...req.body.listing});
+        let listing = await Listing.findByIdAndUpdate(id,{...req.body.listing});
+        let url=req.file.path;
+       let filename = req.file.filename;
+       listing.image={url,filename};
+       await listing.save();
         req.flash("success"," painting updated !");
     }
     res.redirect(`/listings/${id}`);

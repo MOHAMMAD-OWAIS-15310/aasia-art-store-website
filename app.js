@@ -1,3 +1,7 @@
+if(process.env.NODE_ENV != "production"){
+    require('dotenv').config();
+}
+
 const express=require("express");
 const mongoose = require("mongoose");
 const app=express();
@@ -44,7 +48,7 @@ app.engine('ejs',ejsMate);
 app.use(express.static(path.join(__dirname,"/public")));
 
 const sessionOptions = {
-    secret : "mysupersecretcode",
+    secret : process.env.SESSION_SECRET,
     resave : false,
     saveUninitialized : true,
     cookie : {

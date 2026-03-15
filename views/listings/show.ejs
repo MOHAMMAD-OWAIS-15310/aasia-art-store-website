@@ -6,7 +6,7 @@
          
          <h2><%=listing.title%></h2>
          <div class="card listing-card" style="width: 18rem;">
-            <img src="<%=listing.image%>" class="card-img-top show-img" alt="listing_image">
+            <img src="<%=listing.image.url%>" class="card-img-top show-img" alt="listing_image">
             <div class="card-body listing-card-body">
                <div class="all-li">
                   <ul>
@@ -65,7 +65,7 @@
                         <p class="card-text"><%= review.rating %> stars </p>
                      </div>
                      <form method="post" action="/listings/<%=listing.id%>/reviews/<%=review.id%>?_method=delete">
-                        <% if((currUser && currUser._id.equals(review.author._id) || currUser.email=="aasiataqi1811@gmail.com")){ %>
+                        <% if(currUser && (currUser._id.equals(review.author._id) || currUser.email=="aasiataqi1811@gmail.com")){ %>
                         <button class="btn btn-danger mb-2">delete</button>
                         <% } %>
                      </form>
