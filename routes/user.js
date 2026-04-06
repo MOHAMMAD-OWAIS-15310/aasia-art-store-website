@@ -4,7 +4,7 @@ const User = require("../models/user.js");
 const wrapAsync = require("../utils/wrapAsync");
 const passport = require("passport");
 const { saveRedirectUrl } = require("../middleware.js");
-const sendOTPEmail = require("../utils/sendEmail");
+const {sendOTPEmail,sendResetEmail} = require("../utils/sendEmail");
 
 router.get("/signup",(req,res)=>{
     res.render("users/signup.ejs");
@@ -86,6 +86,8 @@ router.post("/verify-otp", wrapAsync(async (req, res, next) => {
 
 }));
 
+//.............login rout
+
 router.get("/login",(req,res)=>{
     res.render("users/login.ejs");
 });
@@ -128,6 +130,72 @@ router.post("/login",saveRedirectUrl, async (req, res, next) => {
   }
 });
 
+//.....forgot pass
+router.get("/forgot-password", (req,res)=>{
+  res.render("users/forgotPassword.ejs");
+});
+//post
+router.post("/forgot-password", wrapAsync(async (req,res)=>{
+  
+  const { email } = req.body;
+  const user = await User.findOne({ email });
+
+  if(!user){
+    req.flash("error","No account with that email");
+    return res.redirect("/forgot-password");
+  }
+
+  const token = Math.random().toString(36).substring(2);
+
+  user.resetToken = token;
+  user.resetTokenExpires = Date.now() + 15*60*1000;
+  await user.save();
+
+  await sendResetEmail(email, token);
+
+  req.flash("success","Password reset link sent to your email");
+  res.redirect("/login");
+
+}));
+
+// .................reset pass
+router.get("/reset-password/:token", wrapAsync(async (req,res)=>{
+  const user = await User.findOne({
+    resetToken: req.params.token,
+    resetTokenExpires: { $gt: Date.now() }
+  });
+
+  if(!user){
+    req.flash("error","Token expired");
+    return res.redirect("/forgot-password");
+  }
+
+  res.render("users/resetPassword.ejs",{ token: req.params.token });
+}));
+
+router.post("/reset-password/:token", wrapAsync(async (req,res)=>{
+  
+  const user = await User.findOne({
+    resetToken: req.params.token,
+    resetTokenExpires: { $gt: Date.now() }
+  });
+
+  if(!user){
+    req.flash("error","Token expired");
+    return res.redirect("/forgot-password");
+  }
+
+  await user.setPassword(req.body.password);
+  user.resetToken = undefined;
+  user.resetTokenExpires = undefined;
+  await user.save();
+
+  req.flash("success","Password updated, Login now");
+  res.redirect("/login");
+
+}));
+
+//...........logout
 router.get("/logout",(req,res,next)=>{
   req.logout((err)=>{
     if(err){

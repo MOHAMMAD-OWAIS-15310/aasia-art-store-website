@@ -140,5 +140,13 @@ body{
     color: red ;
 }
 
+.forgot-password-link{
+    
+    text-decoration: none;
+    margin-left: 70%;
+}
+.payment-para{
+    color: red;
+}
 
 
