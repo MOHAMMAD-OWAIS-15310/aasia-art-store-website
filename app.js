@@ -112,6 +112,13 @@ app.use("/listings/:id/reviews",reviewsRouter);
 
 app.use("/",userRouter);
 
+app.get("/privacy", (req, res) => {
+    res.render("listings/privacy");
+});
+
+app.get("/terms", (req, res) => {
+    res.render("listings/shipping_policy");
+});
 
 
 app.use((err,req,res,next)=>{
