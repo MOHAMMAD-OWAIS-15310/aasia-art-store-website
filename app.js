@@ -16,6 +16,7 @@ const {listingSchema} = require("./schema.js");
 const {reviewSchema} = require("./schema.js");
 const Review = require("./models/review.js");
 const session = require("express-session");
+const {MongoStore} = require('connect-mongo');
 const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
@@ -27,7 +28,8 @@ const savedPaintingsRouter = require("./routes/savedPainting.js");
 const userRouter = require("./routes/user.js");
 
 
-const MONGO_URL="mongodb://127.0.0.1:27017/artStore";
+// const MONGO_URL="mongodb://127.0.0.1:27017/artStore";
+const dbUrl =process.env.ATLASDB_URL;
 
 main()
     .then(()=>{
@@ -38,7 +40,7 @@ main()
     });
 
 async function main(){
-    await mongoose.connect(MONGO_URL);
+    await mongoose.connect(dbUrl);
 }
 app.set("view engine","ejs");
 app.set("views",path.join(__dirname,"views"));
@@ -47,7 +49,16 @@ app.use(methodOverride("_method"));
 app.engine('ejs',ejsMate);
 app.use(express.static(path.join(__dirname,"/public")));
 
+const store=MongoStore.create({
+    mongoUrl : dbUrl,
+        secret : process.env.SESSION_SECRET,
+    touchAfter : 24*3600
+});
+store.on("error",(err)=>{
+    console.log("error in mongo session store",err);
+})
 const sessionOptions = {
+    store,
     secret : process.env.SESSION_SECRET,
     resave : false,
     saveUninitialized : true,
@@ -57,6 +68,9 @@ const sessionOptions = {
         httpOnly : true
     }
 };
+
+
+
 app.get("/",(req,res)=>{
     res.send("working");
 });
