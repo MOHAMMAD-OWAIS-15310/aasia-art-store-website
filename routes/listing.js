@@ -104,10 +104,12 @@ router.put("/:id" ,isAdminLoggedIn,upload.single('listing[image]'), validateList
     // await Listing.findByIdAndUpdate(id,{...req.body.listing});
     if (req.user.email == "aasiataqi1811@gmail.com") {
         let listing = await Listing.findByIdAndUpdate(id,{...req.body.listing});
-        let url=req.file.path;
-       let filename = req.file.filename;
-       listing.image={url,filename};
-       await listing.save();
+        if(req.file){
+            let url=req.file.path;
+            let filename = req.file.filename;
+            listing.image={url,filename};
+            await listing.save();
+        }
         req.flash("success"," painting updated !");
     }
     res.redirect(`/listings/${id}`);
