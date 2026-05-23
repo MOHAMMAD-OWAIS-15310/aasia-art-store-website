@@ -153,4 +153,23 @@ body{
     color: rgb(228, 196, 16) !important;
 }
 
+.site-name{
+    font-size: xx-large;
+    /* color: rgb(117, 168, 46); */
+    color: rgb(71, 109, 17);
+    /* color: black; */
+}
+
+@media(min-width:1400px){
+
+    .site-name{
+        font-size : 50px;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+}
+
+
 
