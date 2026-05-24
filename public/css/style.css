@@ -8,11 +8,13 @@ body{
 }
 
 .navbar{
-    background-color: rgb(228, 232, 238) !important;
+    /* background-color: rgb(228, 232, 238) !important; */
+    background-color: rgb(229 230 216) !important;
     height: 5rem;
 }
 .navbar-collapse{
-    background-color: rgb(228, 232, 238) !important;
+    /* background-color: rgb(228, 232, 238) !important; */
+     background-color: rgb(229 230 216) !important;
 }
 .logo{
     border-radius: 25px;
@@ -33,7 +35,8 @@ body{
 
 /* footer */
 .footer{
-    background-color: rgb(226, 241, 245);
+    /* background-color: rgb(226, 241, 245); */
+     background-color: rgb(229 230 216) !important;
     text-align: center;
     height: 5rem;
 }
@@ -82,11 +85,16 @@ body{
 }
 .buy-btn{
     margin-right: 2rem;
-    background-color: rgb(105, 18, 187) !important;
+    /* background-color: rgb(105, 18, 187) !important; */
+    background-color: rgb(12, 101, 128) !important;
     border: none !important;
 }
 .buy-btn:hover{
-    background-color: rgb(52, 6, 94) !important;
+    /* background-color: rgb(52, 6, 94) !important; */
+    background-color: rgb(9, 74, 94) !important;
+}
+.button-save{
+    background-color: #2c672a !important;
 }
 .img-anchor:hover{
     opacity: 0.8;
@@ -115,7 +123,8 @@ body{
     padding-left: 30px;;
     margin-right: 2rem;
     margin-left: 2rem;
-    background-color: rgb(105, 18, 187) !important;
+    background-color: rgb(12, 101, 128) !important;
+    /* background-color: rgb(105, 18, 187) !important; */
     border: none !important;
 }
 .all-li{
@@ -171,5 +180,7 @@ body{
 
 }
 
-
+.site-name{
+    font-family: emoji;
+}
 

@@ -60,7 +60,7 @@
                <% for( review of listing.reviews){ %>
                   <div class="card  col-12 col-md-5 mb-2 mt-2 m-2">
                      <div class="card-body">
-                        <h5 class="card-title nav-email">@<%=review.author.username %> (<span class="card-text stars-text-color"><%= review.rating %> stars </span>)</h5>
+                        <h5 class="card-title nav-email">@<%=review.author.username %> <b>(<span class="card-text stars-text-color"><%= review.rating %> stars </span>)</b></h5>
                         <p class="card-text"><%= review.comment %> </p>
                         <!-- <p class="card-text stars-text-color"><%= review.rating %> stars </p> -->
                      </div>
