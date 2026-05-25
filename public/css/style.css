@@ -180,7 +180,17 @@ body{
 
 }
 
+/* .site-name{
+    font-family: emoji ;
+} */
 .site-name{
-    font-family: emoji;
+    font-family: "Changa One", sans-serif;
 }
+.site-name{
+    font-family: "Fredericka the Great", sans-serif;
+}
+.site-name{
+    font-family: "Nerko One", sans-serif;
+}
+
 
