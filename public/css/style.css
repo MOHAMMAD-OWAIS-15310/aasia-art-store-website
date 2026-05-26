@@ -2,6 +2,7 @@ body{
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    padding-bottom: 6rem;
 }
 .container{
     flex: 1;
@@ -39,6 +40,9 @@ body{
      background-color: rgb(229 230 216) !important;
     text-align: center;
     height: 5rem;
+    position: fixed;
+    bottom: 0%;
+    width: 100%;
 }
 .social-logo{
     color: black;
@@ -120,9 +124,10 @@ body{
 
 .buy-btn-show{
     padding-right: 30px;;
-    padding-left: 30px;;
+    padding-left: 30px;
     margin-right: 2rem;
-    margin-left: 2rem;
+    /* margin-left: 2rem; */
+    margin-left: 2px;
     background-color: rgb(12, 101, 128) !important;
     /* background-color: rgb(105, 18, 187) !important; */
     border: none !important;
@@ -176,6 +181,7 @@ body{
         position: absolute;
         left: 50%;
         transform: translateX(-50%);
+        
     }
 
 }
@@ -191,6 +197,8 @@ body{
 }
 .site-name{
     font-family: "Nerko One", sans-serif;
+    /* text-shadow: 5px 2px 5px gray; */
+    /* text-shadow: 5px 2px 5px rgb(156, 216, 170); */
 }
 
 

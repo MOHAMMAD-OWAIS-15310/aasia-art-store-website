@@ -10,18 +10,18 @@
             <div class="card-body listing-card-body">
                <div class="all-li">
                   <ul>
-                     <li>price : &#8377;<%=listing.price.toLocaleString("en-IN")%></li>
-                     <li>size : <%=listing.size%></li>
-                     <li>medium : <%=listing.medium%></li>
-                     <li>Available? <%=listing.available%></li>
+                     <li><b>price :</b> &#8377;<%=listing.price.toLocaleString("en-IN")%></li>
+                     <li><b>size : </b><%=listing.size%></li>
+                     <li><b>medium :</b> <%=listing.medium%></li>
+                     <li><b>Available?</b> <%=listing.available%></li>
                   </ul>
                </div>
                <div class="show-button">
                   <form method="get" action="/listings/<%=listing.id%>/payment">
-                     <button class="btn btn-dark buy-btn-show">Buy Now</button>
+                     <button class="btn btn-dark buy-btn-show buy-button-here">Buy Now</button>
                   </form><br>
                   <form method="post" action="/listings/<%=listing.id%>/save">
-                     <button class="btn btn-success">Save Painting</button>
+                     <button class="btn btn-success">Save painting</button>
                   </form><br>
                  <% if (currUser && currUser.email == "aasiataqi1811@gmail.com") { %>
                   <form method="get" action="/listings/<%=listing.id%>/edit">
@@ -60,7 +60,7 @@
                <% for( review of listing.reviews){ %>
                   <div class="card  col-12 col-md-5 mb-2 mt-2 m-2">
                      <div class="card-body">
-                        <h5 class="card-title nav-email">@<%=review.author.username %> <b>(<span class="card-text stars-text-color"><%= review.rating %> stars </span>)</b></h5>
+                        <h5 class="card-title "><b>@<%=review.author.username %></b> <b>(<span class="card-text stars-text-color"><%= review.rating %> stars </span>)</b></h5>
                         <p class="card-text"><%= review.comment %> </p>
                         <!-- <p class="card-text stars-text-color"><%= review.rating %> stars </p> -->
                      </div>
