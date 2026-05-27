@@ -61,7 +61,7 @@
                   <div class="card  col-12 col-md-5 mb-2 mt-2 m-2">
                      <div class="card-body">
                         <h5 class="card-title "><b>@<%=review.author.username %></b> <b>(<span class="card-text stars-text-color"><%= review.rating %> stars </span>)</b></h5>
-                        <p class="card-text"><%= review.comment %> </p>
+                        <p class="card-text"><i><%= review.comment %></i></p>
                         <!-- <p class="card-text stars-text-color"><%= review.rating %> stars </p> -->
                      </div>
                      <form method="post" action="/listings/<%=listing.id%>/reviews/<%=review.id%>?_method=delete">

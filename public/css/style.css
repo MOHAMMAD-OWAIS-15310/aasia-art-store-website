@@ -39,7 +39,9 @@ body{
     /* background-color: rgb(226, 241, 245); */
      background-color: rgb(229 230 216) !important;
     text-align: center;
-    height: 5rem;
+    /* height: 5rem; */
+    /* height: 3rem; */
+    height: 46px;
     position: fixed;
     bottom: 0%;
     width: 100%;
@@ -48,7 +50,8 @@ body{
     color: black;
 }
 .social-logo:hover{
-    color: rgb(146, 92, 117);
+    /* color: rgb(146, 92, 117); */
+    color: rgb(21, 26, 171);
     cursor: pointer;
 }
 .f-link a{
@@ -174,15 +177,38 @@ body{
     /* color: black; */
 }
 
+@media(min-width:530px){
+    .show-img{
+    height: 60vh !important;
+    width: 60vw !important;
+}
+}
+@media(min-width:780px){
+
+    .site-name{
+        font-size : 50px;
+  
+    }
+    .show-img{
+    height: 60vh !important;
+    width: 50vw !important;
+}
+
+}
 @media(min-width:1400px){
 
     .site-name{
         font-size : 50px;
         position: absolute;
-        left: 50%;
+        /* left: 50%; */
+        left: 55%;
         transform: translateX(-50%);
         
     }
+    .show-img{
+    height: 80vh !important;
+    width: 50vw !important;
+}
 
 }
 
@@ -200,5 +226,31 @@ body{
     /* text-shadow: 5px 2px 5px gray; */
     /* text-shadow: 5px 2px 5px rgb(156, 216, 170); */
 }
-
+/* 770 */
+@media (min-width: 460px) and (max-width: 680px) {
+    
+    .listing-card{
+        padding-left: 0;
+        padding-right: 0;
+        text-align: center;
+    }
+    .index-img{
+        height: 60vh !important;
+    width: 83vw !important;
+    }
+}
+@media (min-width: 680px) and (max-width: 770px) {
+    .container{
+        margin-left: 70px;
+    }
+    .listing-card{
+        padding-left: 0;
+        padding-right: 0;
+        text-align: center;
+    }
+    .index-img{
+        height: 60vh !important;
+    width: 83vw !important;
+    }
+}
 
