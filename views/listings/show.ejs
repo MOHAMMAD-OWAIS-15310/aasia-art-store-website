@@ -16,13 +16,22 @@
                      <li><b>Available?</b> <%=listing.available%></li>
                   </ul>
                </div>
+               
                <div class="show-button">
+                  <% if(listing.available == "yes"){%>
                   <form method="get" action="/listings/<%=listing.id%>/payment">
                      <button class="btn btn-dark buy-btn-show buy-button-here">Buy Now</button>
                   </form><br>
-                  <form method="post" action="/listings/<%=listing.id%>/save">
-                     <button class="btn btn-success">Save painting</button>
-                  </form><br>
+                  <% } %>
+                  <!-- <form method="post" action="/listings/<%=listing.id%>/cart">
+                     <button class="btn btn-success">Add to Cart</button>
+                  </form><br> -->
+                  <% if(listing.available == "yes"){%>
+                  <form method="post" action="/listings/<%=listing.id%>/cart">
+                        <button class="btn btn-success mt-2 cart-btn buy-btn">Add to Cart</button>
+                  </form>
+                   <% } %> 
+                  
                  <% if (currUser && currUser.email == "aasiataqi1811@gmail.com") { %>
                   <form method="get" action="/listings/<%=listing.id%>/edit">
                      <button class="btn btn-danger">edit</button>
@@ -31,6 +40,11 @@
                      <button class="btn btn-danger">delete</button>
                   </form>
                   <% } %>
+               </div>
+               <div class="show-button">
+               <form method="post" action="/listings/<%=listing.id%>/save">
+                     <button class="btn mt-3 btn-success">Save Painting</button>
+                  </form><br>
                </div>
             </div>
          </div>

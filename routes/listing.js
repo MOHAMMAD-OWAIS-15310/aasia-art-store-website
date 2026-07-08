@@ -11,6 +11,8 @@ const {isLoggedIn}= require("../middleware.js");
 const {isAdminLoggedIn}= require("../middleware.js");
 const multer  = require('multer');
 
+const User = require("../models/user.js");
+
 const {storage} = require("../cloudConfig.js");
 const upload = multer({ storage});
 
@@ -52,9 +54,10 @@ router.get("/about", ((req,res)=>{
 }));
 
 //myCart
-router.get("/cart", ((req,res)=>{
-    res.render("listings/cart.ejs");
-}));
+// router.get("/cart", ((req,res)=>{
+//     res.render("listings/cart.ejs");
+// }));
+
 
 //buyNow
 router.get("/:id/payment", wrapAsync(async(req,res)=>{

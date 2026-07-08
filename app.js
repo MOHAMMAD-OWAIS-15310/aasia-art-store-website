@@ -22,6 +22,7 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user.js");
 
+const cartsRouter =require("./routes/cart.js");
 const listingsRouter = require("./routes/listing.js");
 const reviewsRouter = require("./routes/review.js");
 const savedPaintingsRouter = require("./routes/savedPainting.js");
@@ -96,8 +97,8 @@ app.use((req,res,next)=>{
 })
 
 
-
-
+//cart
+app.use("/listings",cartsRouter);
 
 //saved painting routes
 app.use("/listings",savedPaintingsRouter);

@@ -8,22 +8,31 @@
         <div class="card col listing-card" >
             <a href="/listings/<%=listing._id%>" class="img-anchor "><img src="<%=listing.image.url%>" class="card-img-top index-img" alt="listing_image" style="height: 20rem;"></a>
             <div class="card-body listing-card-body">
+                <div class="index-detail">
                 <p class="card-text"><b>Title</b>: <%= listing.title %></p>
-                <p class="card-text"><b>Price</b>:&#8377;<%=listing.price.toLocaleString("en-IN")%></p>
+                <p class="card-text"><b>Price</b>: &#8377;<%=listing.price.toLocaleString("en-IN")%></p>
                 <p class="card-text"><b>Available ?</b> 
                     <span class="<%= listing.available === 'yes' ? 'available-yes-color' : 'available-no-color'%>">
                         <%= listing.available %>
                     </span>
                 </p>
+                </div>
                 <div class="index-two-btn">
                     <% if(listing.available == "yes"){%>
                     <form method="get" action="/listings/<%=listing.id%>/payment">
                         <button class="btn btn-danger mt-2 buy-btn ">Buy Now</button>
                     </form>
                     <% } %>
+                    <% if(listing.available == "yes"){%>
+                    <form method="post" action="/listings/<%=listing.id%>/cart">
+                        <button class="btn btn-success mt-2  cart-btn buy-btn">Add to Cart</button>
+                    </form>
+                    <% } %>
                     <form method="post" action="/listings/<%=listing.id%>/save">
                         <button class="btn btn-success mt-2 button-save">Save</button>
                     </form>
+                    
+                    
                 </div>
             </div>
         </div>
