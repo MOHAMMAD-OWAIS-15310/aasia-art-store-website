@@ -60,10 +60,16 @@ router.get("/about", ((req,res)=>{
 
 
 //buyNow
-router.get("/:id/payment", wrapAsync(async(req,res)=>{
+router.get("/:id/payment", isLoggedIn, wrapAsync(async(req,res)=>{
+    if(req.user){
     let {id} = req.params;
     const listing= await Listing.findById(id);
-    res.render("listings/payment.ejs",{listing});
+    return res.render("listings/payment.ejs",{listing});
+    }
+    if(!req.user){
+        req.flash("error","you must be logged in to buy painting ");
+    }
+    return res.redirect("/listings");
 }));
 
 

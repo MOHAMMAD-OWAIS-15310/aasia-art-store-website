@@ -39,6 +39,17 @@ router.get("/cart", isLoggedIn, wrapAsync(async (req, res) => {
     res.render("listings/cart.ejs", { cart });
 }));
 
+// Remove 
+router.post("/:id/remove", isLoggedIn, wrapAsync(async (req, res) => {
+    const { id } = req.params;
 
+    await Cart.findOneAndDelete({
+        listing: id,
+        user: req.user._id,
+    });
+
+    req.flash("success", "Painting removed from cart");
+    res.redirect("/listings/cart");
+}));
 
 module.exports = router;

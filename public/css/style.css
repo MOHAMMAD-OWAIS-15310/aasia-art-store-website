@@ -29,6 +29,16 @@ body{
 .save-one{
     display: flex;
 }
+/* cart */
+.cart-one{
+    display: flex;
+    margin-left: 10px;;
+}
+.cart-detail{
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
 .unsave-btn{
     padding: 2px;
     margin: 3px;
@@ -169,7 +179,9 @@ body{
 .forgot-password-link{
     
     text-decoration: none;
-    margin-left: 70%;
+    /* margin-left: 70%; */
+    margin-left: 5%;
+
 }
 .payment-para{
     color: red;
@@ -190,6 +202,7 @@ body{
     .show-img{
     height: 60vh !important;
     width: 60vw !important;
+    
 }
 }
 @media(min-width:780px){

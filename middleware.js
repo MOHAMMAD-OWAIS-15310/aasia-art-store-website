@@ -15,7 +15,13 @@ module.exports.isAdminLoggedIn = (req,res,next) =>{
 }
 module.exports.isLoggedIn = (req,res,next) =>{
     if(!req.isAuthenticated()){
-        req.session.redirectUrl = req.originalUrl;
+        //........this prob of  get and post original url solved using this idea
+        // req.session.redirectUrl = req.originalUrl;
+        if (req.method === "GET") {
+            req.session.redirectUrl = req.originalUrl;
+        } else {
+            req.session.redirectUrl = req.get("Referrer") || "/listings"; //refere: ye batata h ki user kaha se aaya is page par req maar kar
+        }
         req.flash("error","you must be logged in");
         return res.redirect("/login");
     }
