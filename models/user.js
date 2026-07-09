@@ -36,6 +36,7 @@ const userSchema = new Schema({
 
     resetToken : String,
     resetTokenExpires : Date,
+
 })
 userSchema.plugin(passportLocalMongoose);
 // userSchema.plugin(passportLocalMongoose, {usernameField: "email"});

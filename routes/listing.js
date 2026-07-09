@@ -11,6 +11,8 @@ const {isLoggedIn}= require("../middleware.js");
 const {isAdminLoggedIn}= require("../middleware.js");
 const multer  = require('multer');
 
+const User = require("../models/user.js");
+
 const {storage} = require("../cloudConfig.js");
 const upload = multer({ storage});
 
@@ -52,15 +54,22 @@ router.get("/about", ((req,res)=>{
 }));
 
 //myCart
-router.get("/cart", ((req,res)=>{
-    res.render("listings/cart.ejs");
-}));
+// router.get("/cart", ((req,res)=>{
+//     res.render("listings/cart.ejs");
+// }));
+
 
 //buyNow
-router.get("/:id/payment", wrapAsync(async(req,res)=>{
+router.get("/:id/payment", isLoggedIn, wrapAsync(async(req,res)=>{
+    if(req.user){
     let {id} = req.params;
     const listing= await Listing.findById(id);
-    res.render("listings/payment.ejs",{listing});
+    return res.render("listings/payment.ejs",{listing});
+    }
+    if(!req.user){
+        req.flash("error","you must be logged in to buy painting ");
+    }
+    return res.redirect("/listings");
 }));
 
 
