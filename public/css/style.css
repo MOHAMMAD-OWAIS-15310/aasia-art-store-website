@@ -80,6 +80,10 @@ body{
     text-align: center;
     /* margin-left: 70px !important; */
 }
+/* .show-index-detail{
+    text-align: center;
+    justify-content: center;
+} */
 .listing-card{
     border: none !important;
     margin-bottom: 3rem;
@@ -94,6 +98,7 @@ body{
     padding: 2px;
     display: grid;
     justify-content: center;
+    
 }
 
 .card-text{
@@ -135,6 +140,7 @@ body{
 .show-img{
     height: 40vh !important;
     width: 60vw !important;
+    /* width: auto; */
 }
 
 .show-button{
@@ -204,6 +210,7 @@ body{
     width: 60vw !important;
     
 }
+    
 }
 @media(min-width:780px){
 
@@ -211,6 +218,7 @@ body{
         font-size : 50px;
   
     }
+    
     .show-img{
     height: 60vh !important;
     width: 50vw !important;

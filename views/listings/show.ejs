@@ -8,14 +8,14 @@
          <div class="card listing-card" style="width: 18rem;">
             <img src="<%=listing.image.url%>" class="card-img-top show-img" alt="listing_image">
             <div class="card-body listing-card-body">
-               <div class="all-li">
-                  <ul>
-                     <li><b>price :</b> &#8377;<%=listing.price.toLocaleString("en-IN")%></li>
-                     <li><b>size : </b><%=listing.size%></li>
-                     <li><b>medium :</b> <%=listing.medium%></li>
-                     <li><b>Available?</b> <%=listing.available%></li>
-                  </ul>
-               </div>
+                  <div class=" show-index-detail">
+                  
+                     <p class="card-text"><b>price :</b> &#8377;<%=listing.price.toLocaleString("en-IN")%></p>
+                     <p class="card-text"><b>size : </b><%=listing.size%></p>
+                     <p class="card-text"><b>medium :</b> <%=listing.medium%></p>
+                     <p class="card-text"><b>Available?</b> <%=listing.available%></p>
+                  </div>
+               
                
                <div class="show-button">
                   <% if(listing.available == "yes"){%>
