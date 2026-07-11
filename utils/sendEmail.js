@@ -7,13 +7,23 @@ const sendOTPEmail = async (email, otp) => {
         console.log("EMAIL_USER:", process.env.EMAIL_USER);
         console.log("EMAIL_PASS exists:", !!process.env.EMAIL_PASS);
 
+    // const transporter = nodemailer.createTransport({
+    //     service: "gmail",
+    //     auth: {
+    //         user: process.env.EMAIL_USER,
+    //         pass: process.env.EMAIL_PASS
+    //     }
+    // });
     const transporter = nodemailer.createTransport({
-        service: "gmail",
-        auth: {
-            user: process.env.EMAIL_USER,
-            pass: process.env.EMAIL_PASS
-        }
-    });
+    host: "smtp.gmail.com",
+    port: 587,
+    secure: false,
+    requireTLS: true,
+    auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
+    }
+});
     console.log("Transporter created");
     const mailOptions = {
         from: process.env.EMAIL_USER,
@@ -38,13 +48,23 @@ const sendResetEmail = async (email, token) => {
     console.log("EMAIL_USER:", process.env.EMAIL_USER);
     console.log("EMAIL_PASS exists:", !!process.env.EMAIL_PASS);
 
+    // const transporter = nodemailer.createTransport({
+    //     service: "gmail",
+    //     auth: {
+    //         user: process.env.EMAIL_USER,
+    //         pass: process.env.EMAIL_PASS
+    //     }
+    // });
     const transporter = nodemailer.createTransport({
-        service: "gmail",
-        auth: {
-            user: process.env.EMAIL_USER,
-            pass: process.env.EMAIL_PASS
-        }
-    });
+    host: "smtp.gmail.com",
+    port: 587,
+    secure: false,
+    requireTLS: true,
+    auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
+    }
+});
     console.log("Transporter created");
     // const resetLink = `http://localhost:3000/reset-password/${token}`;
     const resetLink = `${process.env.BASE_URL}/reset-password/${token}`;
