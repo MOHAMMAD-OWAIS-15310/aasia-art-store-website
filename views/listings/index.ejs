@@ -19,7 +19,7 @@
                 </div>
                 <div class="index-two-btn">
                     <% if(listing.available == "yes"){%>
-                    <form method="get" action="/listings/<%=listing.id%>/payment">
+                    <form method="get" action="/orders/<%=listing.id%>/checkout">
                         <button class="btn btn-danger mt-2 buy-btn ">Buy Now</button>
                     </form>
                     <% } %>

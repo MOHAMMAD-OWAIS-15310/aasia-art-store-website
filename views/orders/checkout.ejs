@@ -1,0 +1,55 @@
+<% layout("/layouts/boilerplate") %>
+
+<h2 class="mt-3">Checkout</h2>
+
+<% for (let listing of listings) { %>
+    <div class="card mb-3 col-8 offset-2" style="width:18rem;">
+        <img src="<%= listing.image.url %>" class="card-img-top">
+        <div class="card-body">
+            <h5><%= listing.title %></h5>
+            <p> ₹ <%= listing.price.toLocaleString("en-IN") %></p>
+        </div>
+    </div>
+<% } %>
+
+<hr>
+<div class="row mt-3">
+    <div class="col-8 offset-2">
+        <h2><b>Payment details</b></h2>
+<form method="post" action="/orders/<%= listings[0]._id %>/place-order">
+    <div class="mb-3">
+        <label class="form-label">Full Name</label>
+        <input type="text" name="name" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Phone Number</label>
+        <input type="text" name="phone" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Address</label>
+        <textarea name="address" class="form-control" required></textarea>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">City</label>
+        <input type="text" name="city" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">State</label>
+        <input type="text" name="state" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Pincode</label>
+        <input type="text" name="pincode" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Payment Method</label>
+        <input type="text" class="form-control" value="Cash on Delivery (COD)" readonly>
+    </div>
+
+    <h4>Total: ₹<%= listings[0].price.toLocaleString("en-IN") %></h4>
+    <button class="btn btn-success mt-3">Place Order</button>
+</form>
+</div>
+</div>

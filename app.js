@@ -27,6 +27,7 @@ const listingsRouter = require("./routes/listing.js");
 const reviewsRouter = require("./routes/review.js");
 const savedPaintingsRouter = require("./routes/savedPainting.js");
 const userRouter = require("./routes/user.js");
+const ordersRouter = require("./routes/order.js");
 
 
 // const MONGO_URL="mongodb://127.0.0.1:27017/artStore";
@@ -96,6 +97,8 @@ app.use((req,res,next)=>{
     next();
 })
 
+//order
+app.use("/orders",ordersRouter);
 
 //cart
 app.use("/listings",cartsRouter);

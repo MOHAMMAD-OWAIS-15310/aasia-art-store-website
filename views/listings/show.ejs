@@ -19,7 +19,7 @@
                
                <div class="show-button">
                   <% if(listing.available == "yes"){%>
-                  <form method="get" action="/listings/<%=listing.id%>/payment">
+                  <form method="get" action="/orders/<%=listing.id%>/checkout">
                      <button class="btn btn-dark buy-btn-show buy-button-here">Buy Now</button>
                   </form><br>
                   <% } %>
