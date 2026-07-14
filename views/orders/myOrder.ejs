@@ -1,0 +1,32 @@
+<% layout("/layouts/boilerplate") %>
+
+<h2 class="mt-3 mb-4">My Orders</h2>
+<% if(orders.length === 0){ %>
+    <h4>No orders found</h4>
+
+<% } %>
+
+<% for(let order of orders){%>
+    <div class="card mb-4 p-3">
+            <%for(let painting of order.paintings){%>
+
+            <div class="d-flex align-items-center mb-3">
+                <img src="<%=painting.image.url%>" width="130" height="100" class="me-2">
+                <div>
+                    <h5> <%= painting.title %></h5>
+                    <p> ₹<%= painting.price.toLocaleString("en-IN") %></p>
+                </div>
+            </div>
+        <% } %>
+        <h5>Order status:<span class="text-success"><%= order.status%></span>
+        </h5>
+        <p><b>Payment: </b><%= order.paymentMethod %></p>
+        <p>
+            <b>Total: </b>₹<%= order.totalAmount.toLocaleString("en-IN") %>
+        </p>
+        <p>
+            <b>Ordered on: </b><%= order.createdAt.toDateString() %>
+        </p>
+        
+        </div>
+<% } %>

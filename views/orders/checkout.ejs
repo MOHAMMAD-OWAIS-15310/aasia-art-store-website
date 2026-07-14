@@ -1,10 +1,10 @@
 <% layout("/layouts/boilerplate") %>
 
-<h2 class="mt-3">Checkout</h2>
+<h2 class="mt-3"><b>Checkout</b></h2>
 
 <% for (let listing of listings) { %>
-    <div class="card mb-3 col-8 offset-2" style="width:18rem;">
-        <img src="<%= listing.image.url %>" class="card-img-top">
+    <div class="card mb-3 col-8 offset-2" style="width:10rem; height: 260px;">
+        <img src="<%= listing.image.url %>" class="card-img-top" height="150px">
         <div class="card-body">
             <h5><%= listing.title %></h5>
             <p> ₹ <%= listing.price.toLocaleString("en-IN") %></p>

@@ -42,11 +42,19 @@ router.post("/:id/place-order", isLoggedIn, wrapAsync(async (req, res) => {
         pincode,
         totalAmount: listing.price,
     });
+    console.log(order);
     await order.save();
     listing.available = "no";
     await listing.save();
     req.flash("success", " order placed successfully");
     res.redirect("/listings");
+}));
+
+// My Orders
+router.get("/my-orders", isLoggedIn, wrapAsync(async (req, res) => {
+    const orders=await Order.find({user: req.user._id,}).populate("paintings");
+
+    res.render("orders/myOrder.ejs",{orders});
 }));
 
 module.exports = router;
